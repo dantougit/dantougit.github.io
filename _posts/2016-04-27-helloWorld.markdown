@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Welcome to Jekyll!"
-date:
+date: 2016-04-27 16:25:00
 categories: main
 ---
 
