@@ -43,5 +43,5 @@ categories: main
 顺便练习下发图片
 -
 
-![1](../photos/1.png)
+![](photos/1.png)
 
