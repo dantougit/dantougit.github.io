@@ -39,9 +39,3 @@ categories: main
 	}
 	
 ```
-
-顺便练习下发图片
--
-
-![](photos/1.png)
-
