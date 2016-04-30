@@ -39,7 +39,7 @@ artist_id|String|歌曲所属的艺人Id|03c6699ea836decbc5c8fc2dbae7bd3b
 publish_time|String|歌曲发行时间，精确到天|20150325
 song_init_plays|String|歌曲的初始播放数，表明该歌曲的初始热度|0
 Language|String|数字表示1,2,3…|100
-Gender|String|1,2,3|1
+Gender|String|1,2,3（男,女,乐队）|1
 
 
 选手提交结果表（mars_tianchi_artist_plays_predict）
