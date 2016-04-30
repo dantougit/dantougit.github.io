@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  
+  <head>
+  <meta charset="UTF-8">
+  <title>The dantou's blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/cayman.css">
+</head>
+
+  <body>
+    <section class="page-header">
+  <h1 class="project-name">The dantou's blog</h1>
+  <h2 class="project-tagline">A newbie named dantou!</h2>
+  <!--<a href="#" class="btn">View on GitHub</a>-->
+</section>
+
+
+    <section class="main-content">
+      
+      <h1 id="section">竞赛题目</h1>
+<blockquote>
+  <p>经过7年的发展与沉淀，目前阿里音乐拥有数百万的曲库资源，每天千万的用户活跃在平台上，拥有数亿人次的用户试听、收藏等行为。在原创艺人和作品方面，更是拥有数万的独立音乐人，每月上传上万个原创作品，形成超过几十万首曲目的原创作品库，如此庞大的数据资源库对于音乐流行趋势的把握有着极为重要的指引作用。</p>
+</blockquote>
+
+<blockquote>
+  <p>本次大赛以阿里音乐用户的历史播放数据为基础，期望参赛者可以通过对阿里音乐平台上每个阶段艺人的试听量的预测，挖掘出即将成为潮流的艺人，从而实现对一个时间段内音乐流行趋势的准确把控。</p>
+</blockquote>
+
+<h1 id="section-1">竞赛数据</h1>
+
+<blockquote>
+  <p>大赛开放抽样的歌曲艺人数据，以及和这些艺人相关的6个月内（20150301-20150830）的用户行为历史记录。</p>
+</blockquote>
+
+<h2 id="marstianchiuseractions">用户行为表（mars_tianchi_user_actions）</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>列名</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_id</td>
+      <td>String</td>
+      <td>用户唯一标识</td>
+      <td>7063b3d0c075a4d276c5f06f4327cf4a</td>
+    </tr>
+    <tr>
+      <td>song_id</td>
+      <td>String</td>
+      <td>歌曲唯一标识</td>
+      <td>effb071415be51f11e845884e67c0f8c</td>
+    </tr>
+    <tr>
+      <td>gmt_create</td>
+      <td>String</td>
+      <td>用户播放时间（unix时间戳表示）精确到小时</td>
+      <td>1426406400</td>
+    </tr>
+    <tr>
+      <td>action_type</td>
+      <td>String</td>
+      <td>行为类型：1，播放；2，下载，3，收藏</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Ds</td>
+      <td>String</td>
+      <td>记录收集日（分区）</td>
+      <td>20150315</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="marstianchisongs">歌曲艺人（mars_tianchi_songs）</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>列名</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>song_id</td>
+      <td>String</td>
+      <td>歌曲唯一标识</td>
+      <td>c81f89cf7edd24930641afa2e411b09c</td>
+    </tr>
+    <tr>
+      <td>artist_id</td>
+      <td>String</td>
+      <td>歌曲所属的艺人Id</td>
+      <td>03c6699ea836decbc5c8fc2dbae7bd3b</td>
+    </tr>
+    <tr>
+      <td>publish_time</td>
+      <td>String</td>
+      <td>歌曲发行时间，精确到天</td>
+      <td>20150325</td>
+    </tr>
+    <tr>
+      <td>song_init_plays</td>
+      <td>String</td>
+      <td>歌曲的初始播放数，表明该歌曲的初始热度</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Language</td>
+      <td>String</td>
+      <td>数字表示1,2,3…</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>String</td>
+      <td>1,2,3</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="marstianchiartistplayspredict">选手提交结果表（mars_tianchi_artist_plays_predict）</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>列名</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>artist_id</td>
+      <td>String</td>
+      <td>歌曲所属的艺人Id</td>
+      <td>023406156015ef87f99521f3b343f71f</td>
+    </tr>
+    <tr>
+      <td>Plays</td>
+      <td>String</td>
+      <td>艺人当天的播放数据</td>
+      <td>5000</td>
+    </tr>
+    <tr>
+      <td>Ds</td>
+      <td>String</td>
+      <td>日期</td>
+      <td>20150901</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>结果集：
+选手需要预测艺人随后2个月，即60天（20150901-20151030）的播放数据。</p>
+</blockquote>
+
+<h1 id="section-2">解题思路</h1>
+
+<h2 id="section-3">1.建库建表导数据</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE DATABASE `tianchi` /*!40100 DEFAULT CHARACTER SET utf8 */
+
+CREATE TABLE mars_tianchi_user_actions (
+  `user_id` varchar(40),
+  `song_id` varchar(40),
+  `gmt_create` varchar(20),
+  `action_type` int(2),
+  `Ds` char(10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE mars_tianchi_songs (
+  `song_id` varchar(40),
+  `artist_id` varchar(40),
+  `publish_time` char(10),
+  `song_init_plays` int(11),
+  `Language` char(5),
+  `Gender` int(2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+load data infile '/Users/zl/mars_tianchi_songs.csv' into table mars_tianchi_songs fields terminated by ',' lines terminated by '\n';
+
+load data infile '/Users/zl/mars_tianchi_user_actions.csv' into table mars_tianchi_user_actions fields terminated by ',' lines terminated by '\n';
+
+</code></pre>
+</div>
+
+
+
+      <footer class="site-footer">
+
+  <span class="site-footer-owner">
+    The dantou's blog is maintained by <a href="https://github.com/dantougit">dantougit</a>
+
+  </span>
+</footer>
+
+
+    </section>
+
+  </body>
+</html>
