@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  
+  <head>
+  <meta charset="UTF-8">
+  <title>The dantou's blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/cayman.css">
+</head>
+
+  <body>
+    <section class="page-header">
+  <h1 class="project-name">The dantou's blog</h1>
+  <h2 class="project-tagline">A newbie named dantou!</h2>
+  <!--<a href="#" class="btn">View on GitHub</a>-->
+</section>
+
+
+    <section class="main-content">
+      
+      <h1 id="section">题目描述</h1>
+<div class="highlighter-rouge"><pre class="highlight"><code>Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
+The Sudoku board could be partially filled, where empty cells are filled with the character'.'.
+</code></pre>
+</div>
+
+<h1 id="section-1">程序代码</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	
+	public boolean isValidSudoku(char[][] board) {
+
+		if (board.length != 9 || board[0].length != 9) {
+
+			return false;
+
+		}
+
+		for (int i = 0; i &lt; board.length; i++) {
+			for (int j = 0; j &lt; board[0].length; j++) {
+				if (board[i][j] == '.') {
+
+					continue;
+
+				}
+
+				for (int i2 = 0; i2 &lt; i; i2++) {
+					if (board[i][j] == board[i2][j]) {
+						return false;
+					}
+				}
+
+				for (int j2 = 0; j2 &lt; j; j2++) {
+					if (board[i][j] == board[i][j2]) {
+						return false;
+					}
+				}
+
+				for (int i2 = i - i % 3; i2 &lt; i; i2++) {
+					for (int j2 = j - j % 3; j2 &lt; j - j % 3 + 3; j2++) {
+						if (board[i][j] == board[i2][j2]) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+</code></pre>
+</div>
+
+
+      <footer class="site-footer">
+
+  <span class="site-footer-owner">
+    The dantou's blog is maintained by <a href="https://github.com/dantougit">dantougit</a>
+
+  </span>
+</footer>
+
+
+    </section>
+
+  </body>
+</html>
