@@ -6,9 +6,102 @@
 </description>
     <link>http://blog.dantou.cc/</link>
     <atom:link href="http://blog.dantou.cc/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Apr 2016 13:30:50 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Apr 2016 13:30:50 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Apr 2016 19:39:19 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Apr 2016 19:39:19 +0800</lastBuildDate>
     <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>LeetCode---unique-paths</title>
+        <description>&lt;h1 id=&quot;section&quot;&gt;题目描述&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A robot is located at the top-left corner of a m x n grid (marked &#39;Start&#39; in the diagram below).
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked &#39;Finish&#39; in the diagram below).
+How many possible unique paths are there?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;程序代码&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;1.好吧，狗屎一样的递归，速度太慢&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public int uniquePaths(int m, int n) {
+		if (n &amp;lt; 1 || m &amp;lt; 1) {
+			return 0;
+		}
+
+		if (n == 1 &amp;amp;&amp;amp; m == 1) {
+			return 0;
+		}
+
+		if (n == 1 || m == 1) {
+			return 1;
+		}
+
+		return uniquePaths(n, m - 1) + uniquePaths(n - 1, m);
+
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;2.好吧，排列组合，比最优解慢一点，阶乘不好算啊。。&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public int uniquePaths(int m, int n) {
+
+		if (n &amp;lt; 1 || m &amp;lt; 1) {
+			return 0;
+		}
+
+		if (n == 1 || m == 1) {
+			return 1;
+		}
+
+		return jiecheng(n + m - 2).divide(
+				jiecheng(n - 1).multiply(jiecheng(m - 1))).intValue();
+	}
+
+	public BigDecimal jiecheng(int i) {
+
+		if (i &amp;lt;= 0) {
+			return new BigDecimal(1);
+		}
+
+		BigDecimal prob = new BigDecimal(1);
+		while (i &amp;gt; 0) {
+			prob = prob.multiply(new BigDecimal(i));
+			i--;
+		}
+
+		return prob;
+	}
+	
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;3.别人的答案&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+	public int uniquePaths(int m, int n) {
+		int[][] data = new int[m][n];
+		for (int i = 0; i != m; ++i)
+			for (int j = 0; j != n; ++j) {
+				if (i == 0 || j == 0)
+					data[i][j] = 1;
+				else
+					data[i][j] = data[i - 1][j] + data[i][j - 1];
+			}
+		return data[m - 1][n - 1];
+	}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 30 Apr 2016 19:27:30 +0800</pubDate>
+        <link>http://blog.dantou.cc/main/2016/04/30/LeetCode-unique-paths.html</link>
+        <guid isPermaLink="true">http://blog.dantou.cc/main/2016/04/30/LeetCode-unique-paths.html</guid>
+        
+        
+        <category>main</category>
+        
+      </item>
     
       <item>
         <title>天池---阿里音乐流行趋势预测</title>
@@ -117,7 +210,7 @@
     &lt;tr&gt;
       &lt;td&gt;Gender&lt;/td&gt;
       &lt;td&gt;String&lt;/td&gt;
-      &lt;td&gt;1,2,3&lt;/td&gt;
+      &lt;td&gt;1,2,3（男,女,乐队）&lt;/td&gt;
       &lt;td&gt;1&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -174,6 +267,8 @@ CREATE TABLE mars_tianchi_user_actions (
   `action_type` int(2),
   `Ds` char(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE INDEX index_user_id  ON mars_tianchi_user_actions (user_id);
 
 CREATE TABLE mars_tianchi_songs (
   `song_id` varchar(40),
@@ -248,7 +343,9 @@ Design an algorithm to find the maximum profit. You may complete as many transac
       <item>
         <title>LeetCode---best-time-to-buy-and-sell-stock</title>
         <description>&lt;h1 id=&quot;section&quot;&gt;题目描述&lt;/h1&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Say you have an array for which the ith element is the price of a given stock on day i.
+If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -308,6 +405,7 @@ Design an algorithm to find the maximum profit. You may complete as many transac
       <item>
         <title>LeetCode---reverse-integer</title>
         <description>&lt;h1 id=&quot;section&quot;&gt;题目描述&lt;/h1&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Reverse digits of an integer.
 Example1: x = 123, return 321
 Example2: x = -123, return -321

@@ -126,7 +126,7 @@
     <tr>
       <td>Gender</td>
       <td>String</td>
-      <td>1,2,3</td>
+      <td>1,2,3（男,女,乐队）</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -183,6 +183,8 @@ CREATE TABLE mars_tianchi_user_actions (
   `action_type` int(2),
   `Ds` char(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE INDEX index_user_id  ON mars_tianchi_user_actions (user_id);
 
 CREATE TABLE mars_tianchi_songs (
   `song_id` varchar(40),
