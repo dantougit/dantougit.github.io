@@ -72,6 +72,8 @@ CREATE TABLE mars_tianchi_user_actions (
   `Ds` char(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE INDEX index_user_id  ON mars_tianchi_user_actions (user_id);
+
 CREATE TABLE mars_tianchi_songs (
   `song_id` varchar(40),
   `artist_id` varchar(40),
