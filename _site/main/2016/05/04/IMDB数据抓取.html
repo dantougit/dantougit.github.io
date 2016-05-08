@@ -21,7 +21,387 @@
 
     <section class="main-content">
       
-      <div class="highlighter-rouge"><pre class="highlight"><code>CREATE TABLE `movie` (
+      <h1 id="imdb">数据抓取之IMDB</h1>
+
+<h2 id="movie-url">1.movie url抓取</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	String baseUrl = "http://www.imdb.com";
+	String url = "http://www.imdb.com/search/title?num_votes=100,&amp;start=1&amp;title=*&amp;title_type=feature";
+	BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+			"/Users/zl/Downloads/movie/url"), true));
+	BufferedWriter bws = new BufferedWriter(new FileWriter(new File(
+			"/Users/zl/Downloads/movie/success"), true));
+	BufferedWriter bwf = new BufferedWriter(new FileWriter(new File(
+			"/Users/zl/Downloads/movie/fail"), true));
+
+	while (true) {
+		Document doc = null;
+
+		try {
+			doc = Jsoup
+					.connect(url)
+					.userAgent(
+							"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36")
+					.timeout(10000).get();
+		} catch (Exception e) {
+			bwf.write(url + "\n");
+			continue;
+		}
+
+		Elements e = doc.getElementsByAttributeValueMatching("href",
+				"^/title/tt[0-9]+/$");
+
+		Element next = doc
+				.getElementById("right")
+				.getElementsByAttributeValueMatching("href",
+						"^/search/title\\?num_votes=100,&amp;start=[0-9]+")
+				.last();
+		Set&lt;String&gt; es = new HashSet&lt;String&gt;();
+
+		for (Element ee : e) {
+			es.add(ee.attr("href"));
+		}
+
+		for (String s : es) {
+
+			bw.write(s);
+			bw.newLine();
+
+		}
+
+		System.out.println(url);
+		bws.write(url + "\n");
+
+		if (next == null) {
+			break;
+		}
+		if (!next.text().startsWith("Next")) {
+			break;
+		}
+
+		url = baseUrl + next.attr("href");
+
+	}
+
+	bw.close();
+	bws.close();
+	bwf.close();
+</code></pre>
+</div>
+
+<h2 id="section">2.切割文件为多个</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>vim split.sh
+	
+	counts=`cat url |wc -l`
+
+	num=$(($counts/$1+1))
+
+	split -l $num url url	
+
+chmod +x split.sh
+
+./split.sh 10
+</code></pre>
+</div>
+
+<h2 id="section-1">3.多线程抓取</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Multiple implements Runnable {
+	public static void main(String[] args) throws Exception {
+
+		ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+		for (char i = 'a'; i &lt; 'k'; i++) {
+			fixedThreadPool.execute(new Multiple(i));
+		}
+		fixedThreadPool.shutdown();
+		while (true) {
+			if (fixedThreadPool.isTerminated()) {
+				System.out.println("end");
+				break;
+			}
+			Thread.sleep(2000);
+		}
+	}
+
+	char i = 'a';
+
+	public Multiple(char i) {
+		this.i = i;
+	}
+
+	@Override
+	public void run() {
+		char index = i;
+
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(new File(
+					"/Users/zl/Downloads/movie/movie_url/url" + index)));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		String line = "";
+		List&lt;String&gt; urls = new ArrayList&lt;String&gt;();
+		try {
+			while ((line = br.readLine()) != null) {
+				urls.add(line);
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			br.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new FileWriter(new File(
+					"/Users/zl/Downloads/movie/movie_data/data" + index), true));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		BufferedWriter bws = null;
+		try {
+			bws = new BufferedWriter(new FileWriter(new File(
+					"/Users/zl/Downloads/movie/movie_data/success" + index),
+					true));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		BufferedWriter bwf = null;
+		try {
+			bwf = new BufferedWriter(new FileWriter(new File(
+					"/Users/zl/Downloads/movie/movie_data/fail" + index), true));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String url = "http://www.imdb.com";
+
+		int i = 0;
+
+		while (i &lt; urls.size()) {
+
+			String u = urls.get(i);
+			Document doc = null;
+			try {
+				doc = Jsoup
+						.connect(url + u)
+						.userAgent(
+								"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36")
+						.timeout(10000).get();
+			} catch (Exception e) {
+				try {
+					bwf.write(u + "\n");
+					Thread.sleep(5000);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				continue;
+			}
+
+			Element title = Jsoup.parse(doc.getElementsByClass("title_wrapper")
+					.html());
+
+			// 获取name
+			String name = getName(title);
+
+			// 获取year
+			String year = getYear(title);
+
+			// 获取genre
+			String genre = getGenre(title);
+
+			// 获取评分
+			Document rating = Jsoup.parse(doc.getElementsByClass("imdbRating")
+					.html());
+
+			String ratingValue = getRatingValue(rating);
+			// 获取评分人数
+			String ratingCount = getRatingCount(rating);
+
+			Document data = Jsoup.parse(doc.getElementsByClass("txt-block")
+					.html());
+
+			// 获取country
+			String country = getCountry(data);
+
+			// 获取language
+			String language = getLanguage(data);
+
+			// 获取上映日期
+			String date = getDate(data);
+
+			// 获取budget
+			String budget = getBudget(data);
+
+			// 获取time
+			String time = getTime(data);
+
+			String result = u.substring(9, 16) + "\t" + name + "\t"
+				+ ratingValue + "\t" + ratingCount + "\t" + genre + "\t"
+				+ country + "\t" + language + "\t" + date + "\t" + year
+				+ "\t" + budget + "\t" + time;
+
+			try {
+				bw.write(result + "\n");
+				bws.write(u + "\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println(result);
+			i++;
+
+		}
+
+		try {
+			bw.close();
+			bws.close();
+			bwf.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static String getName(Element title) {
+		Element nameNode = title.getElementsByAttributeValueMatching(
+				"itemprop", "name").first();
+
+		String name = "";
+		if (nameNode != null) {
+			name = nameNode.text();
+		}
+		return name;
+	}
+
+	public static String getYear(Element title) {
+		Element element = title.getElementById("titleYear");
+		String year = "";
+		if (element != null) {
+			year = element.text();
+			year = year.replace("(", "").replace(")", "");
+		}
+
+		return year;
+	}
+
+	public static String getGenre(Element title) {
+		Elements genres = title.getElementsByAttributeValueMatching("href",
+				"^/genre/.+\\?");
+
+		String genre = "";
+		for (Element g : genres) {
+			genre += g.text() + " ";
+		}
+
+		genre = genre.trim();
+
+		return genre;
+	}
+
+	public static String getCountry(Element data) {
+
+		Elements countries = data.getElementsByAttributeValueMatching("href",
+				"^/country/.+\\?");
+		String country = "";
+		for (Element c : countries) {
+			country += c.text() + " ";
+		}
+		country = country.trim();
+
+		return country;
+
+	}
+
+	public static String getLanguage(Element data) {
+
+		Elements languages = data.getElementsByAttributeValueMatching("href",
+				"^/language/.+\\?");
+		String language = "";
+
+		for (Element l : languages) {
+			language += l.text() + " ";
+		}
+		language = language.trim();
+		return language;
+
+	}
+
+	public static String getDate(Element data) {
+		Pattern pattern = Pattern.compile("[0-9]{1,2} [a-zA-Z]+ [0-9]{4}");
+
+		Matcher matcher = pattern.matcher(data.html());
+		String date = "";
+		if (matcher.find()) {
+			date = matcher.group();
+		}
+
+		return date;
+	}
+
+	public static String getBudget(Element data) {
+
+		Pattern pattern = Pattern.compile("Budget: .?[0-9,]+[0-9]{1}");
+		String budget = "";
+		Matcher matcher = pattern.matcher(data.text());
+		if (matcher.find()) {
+			budget = matcher.group();
+		}
+		budget = budget.replace("Budget: ", "");
+		return budget;
+	}
+
+	public static String getTime(Element data) {
+		Elements times = data.getElementsByTag("time");
+		String time = "";
+
+		for (Element t : times) {
+			time += t.text() + " ";
+		}
+		time = time.trim();
+		return time;
+	}
+
+	public static String getRatingValue(Element rating) {
+		Element e = rating.getElementsByAttributeValue("itemprop",
+				"ratingValue").first();
+		String ratingValue = "";
+		if (e != null) {
+			ratingValue = e.text();
+		}
+		return ratingValue;
+	}
+
+	public static String getRatingCount(Element rating) {
+		Element e = rating.getElementsByAttributeValue("itemprop",
+				"ratingCount").first();
+		String ratingCount = "";
+		if (e != null) {
+			ratingCount = e.text();
+		}
+		return ratingCount;
+	}
+
+}
+</code></pre>
+</div>
+
+<h2 id="section-2">4.建表装数</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE TABLE `movie` (
   `movieId` int(10) unsigned NOT NULL,
   `movieName` varchar(200),
   `ratingValue` varchar(10),
