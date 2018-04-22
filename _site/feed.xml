@@ -1,31 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>The dantou&#39;s blog</title>
-    <description>Welcome to the dantou&#39;s blog!
+    <title>The dantou's blog</title>
+    <description>Welcome to the dantou's blog!
 </description>
-    <link>http://blog.dantou.cc/</link>
-    <atom:link href="http://blog.dantou.cc/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 22 Feb 2017 14:48:49 +0800</pubDate>
-    <lastBuildDate>Wed, 22 Feb 2017 14:48:49 +0800</lastBuildDate>
-    <generator>Jekyll v3.1.3</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 22 Apr 2018 22:20:02 +0800</pubDate>
+    <lastBuildDate>Sun, 22 Apr 2018 22:20:02 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>机器学习知识体系构建</title>
+        <description>&lt;h2 id=&quot;1⃣️无监督学习&quot;&gt;1⃣️.无监督学习&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.聚类 类内差异性尽可能小，类之间差异性尽可能大。
+
+    层次化聚类
+        时间复杂度O(n^2)
+        分裂
+        合并
+
+    划分式聚类 kmeans
+        时间复杂度O(n*k*m)
+        k确定 轮廓系数
+        初始点选择 层次聚类
+        非凸 kernel
+        异常点 k-median
+
+    密度聚类 
+        Density-Based Spatial Clustering of Applications with Noise(DBSCAN) 半径 最少点
+
+2.降维  维度降低，信息损失尽可能少。
+
+    PCA
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2⃣️监督学习&quot;&gt;2⃣️.监督学习&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;判别模型
+1.wx
+    感知机
+    逻辑回归
+    SVM                
+
+2.树
+    简单树
+        ID3          信息增益
+        C4.5         信息增益比，比的是特征的熵（因为信息增益更容易选择属性多的特征，这种的熵更大）
+        CART         分类 gini 回归 方差 均值
+    
+    复杂树
+        bagging
+            随机森林
+        boosting     加法模型，前向分步算法
+            adaboost 指数损失|更新权重
+            gbdt     更一般化的损失误差，让损失更小，梯度控制方向，c控制大小
+    
+    最常用工具 xgboost 是Gradient Boosting的一种高效系统实现
+        支持gbtree和gblinear
+        用到二阶导数信息
+        行列采样
+        分裂节点寻找的近似算法
+        特征并行化
+
+3.神经网络
+    全连接神经网络(FC)
+    卷积神经网络(CNN)
+    循环神经网络(RNN)
+        长短期记忆网络(LSTM)
+        Gated Recurrent Unit(GRU)
+
+4.生成模型
+    朴素贝叶斯(NB)
+    隐马尔可夫(HMM)
+    条件随机场(CRF)
+
+5.推荐模型
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3⃣️半监督学习&quot;&gt;3⃣️.半监督学习&lt;/h2&gt;
+
+&lt;h2 id=&quot;4⃣️名词&quot;&gt;4⃣️.名词&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kernel
+
+
+过拟合
+    决策树过拟合
+        剪枝 极小化损失函数
+    神经网络过拟合
+        drop out
+        Batch Normalization
+    方差 偏差
+
+
+评估
+    准确
+    召回
+    f值
+    auc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 22 Apr 2018 12:18:02 +0800</pubDate>
+        <link>http://localhost:4000/main/2018/04/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%9E%84%E5%BB%BA.html</link>
+        <guid isPermaLink="true">http://localhost:4000/main/2018/04/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%9E%84%E5%BB%BA.html</guid>
+        
+        
+        <category>main</category>
+        
+      </item>
     
       <item>
         <title>MapReduce之Shuffle</title>
-        <description>&lt;h1 id=&quot;shuffle&quot;&gt;1.何为Shuffle&lt;/h1&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Shuffle为map输出到reduce输入的过程，shuffle的单位是每个task。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+        <description>&lt;h1 id=&quot;1何为shuffle&quot;&gt;1.何为Shuffle&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Shuffle为map输出到reduce输入的过程，shuffle的单位是每个task。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;map&quot;&gt;2.map端&lt;/h1&gt;
+&lt;h1 id=&quot;2map端&quot;&gt;2.map端&lt;/h1&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;1⃣.输入&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;map task从spilt中读取数据,执行map task，产生key－value输出。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;h2 id=&quot;1⃣输入&quot;&gt;1⃣.输入&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;map task从spilt中读取数据,执行map task，产生key－value输出。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;partitionner&quot;&gt;2⃣.Partitionner&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;reduce数量设置了很多个，那么map每一条输出应该由哪个reduce去做，这时候需要partition了，直接上代码很简单。
+&lt;h2 id=&quot;2⃣partitionner&quot;&gt;2⃣.Partitionner&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;reduce数量设置了很多个，那么map每一条输出应该由哪个reduce去做，这时候需要partition了，直接上代码很简单。
 
 	public class HashPartitioner&amp;lt;K, V&amp;gt; extends Partitioner&amp;lt;K, V&amp;gt; { 
 
@@ -36,51 +135,45 @@
 	} 
 
 这个是默认的Partitionner，我们可以自己写，继承那类就好
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;spill&quot;&gt;3⃣.Spill&lt;/h2&gt;
+&lt;h2 id=&quot;3⃣spill&quot;&gt;3⃣.Spill&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;进行完Partion之后，需要往磁盘写了，为了减少IO对磁盘的影响，结果是先写到内存中一个缓存区中，缓存区默认大小100M，阀值默认80%，当缓存区数据超过 大小＊阀值，会启动单独线程的spill，锁定这80M内存，进行spill，map输出的数据可以继续往剩下20M写，这样一遍一遍循环。那么spill到底是什么过程
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;进行完Partion之后，需要往磁盘写了，为了减少IO对磁盘的影响，结果是先写到内存中一个缓存区中，缓存区默认大小100M，阀值默认80%，当缓存区数据超过 大小＊阀值，会启动单独线程的spill，锁定这80M内存，进行spill，map输出的数据可以继续往剩下20M写，这样一遍一遍循环。那么spill到底是什么过程
 1.sort，对这80M数据按key进行排序，是MapReduce的默认行为
 2.combine，如果有很多个key/value对需要发送到某个reduce端去，那么需要将这些key/value值拼接到一块，减少与partition相关的索引记录。
 3.Combiner，如果设置了Combiner，会在这里运行。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;merge&quot;&gt;4⃣.Merge&lt;/h2&gt;
+&lt;h2 id=&quot;4⃣merge&quot;&gt;4⃣.Merge&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;每次溢写会在磁盘上生成一个spill文件，磁盘上可能会有多个spill文件存在。需要将这些溢写文件归并到一起，这个过程就叫做Merge。
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;每次溢写会在磁盘上生成一个spill文件，磁盘上可能会有多个spill文件存在。需要将这些溢写文件归并到一起，这个过程就叫做Merge。
 不同spill文件中可能有相同的key，所以得merge成group。什么是group。对于&quot;aaa&quot;,1;&quot;aaa&quot;,8 merge为{“aaa”, [1,8]}
 如果设置了Combiner，也会在这里运行，可以减少传到其他节点的带宽
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;reduce&quot;&gt;3.reduce端&lt;/h1&gt;
+&lt;h1 id=&quot;3reduce端&quot;&gt;3.reduce端&lt;/h1&gt;
 
-&lt;h2 id=&quot;copy&quot;&gt;1⃣.Copy&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;请求map task所在的TaskTracker获取map task的输出文件
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;h2 id=&quot;1⃣copy&quot;&gt;1⃣.Copy&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;请求map task所在的TaskTracker获取map task的输出文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;merge-1&quot;&gt;2⃣.Merge&lt;/h2&gt;
+&lt;h2 id=&quot;2⃣merge&quot;&gt;2⃣.Merge&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;merge有三种形式：1)内存到内存  2)内存到磁盘  3)磁盘到磁盘。默认情况下第一种形式不启用。
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;merge有三种形式：1)内存到内存  2)内存到磁盘  3)磁盘到磁盘。默认情况下第一种形式不启用。
 当内存中的数据量到达一定阈值，就启动内存到磁盘的merge。与map 端类似，这也是溢写的过程，这个过程中如果你设置有Combiner，也是会启用的，然后在磁盘中生成了众多的溢写文件。
 第二种merge方式一直在运行，直到没有map端的数据时才结束，然后启动第三种磁盘到磁盘的merge方式生成最终的那个文件。 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;reducer&quot;&gt;3⃣.Reducer的输入文件&lt;/h2&gt;
+&lt;h2 id=&quot;3⃣reducer的输入文件&quot;&gt;3⃣.Reducer的输入文件&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不断地merge后，最后会生成一个最终文件，Shuffle结束
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不断地merge后，最后会生成一个最终文件，Shuffle结束
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Fri, 06 May 2016 11:03:31 +0800</pubDate>
-        <link>http://blog.dantou.cc/main/2016/05/06/MapReduce%E4%B9%8BShuffle.html</link>
-        <guid isPermaLink="true">http://blog.dantou.cc/main/2016/05/06/MapReduce%E4%B9%8BShuffle.html</guid>
+        <link>http://localhost:4000/main/2016/05/06/MapReduce%E4%B9%8BShuffle.html</link>
+        <guid isPermaLink="true">http://localhost:4000/main/2016/05/06/MapReduce%E4%B9%8BShuffle.html</guid>
         
         
         <category>main</category>

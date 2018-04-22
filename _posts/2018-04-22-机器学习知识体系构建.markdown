@@ -1,0 +1,99 @@
+---
+layout: default
+title:  机器学习知识体系构建
+date: 2018-04-22 12:18:02 +0800 
+categories: main
+---
+
+1⃣️.无监督学习
+-
+
+    1.聚类 类内差异性尽可能小，类之间差异性尽可能大。
+
+        层次化聚类
+            时间复杂度O(n^2)
+            分裂
+            合并
+
+        划分式聚类 kmeans
+            时间复杂度O(n*k*m)
+            k确定 轮廓系数
+            初始点选择 层次聚类
+            非凸 kernel
+            异常点 k-median
+
+        密度聚类 
+            Density-Based Spatial Clustering of Applications with Noise(DBSCAN) 半径 最少点
+
+    2.降维  维度降低，信息损失尽可能少。
+
+        PCA
+
+2⃣️.监督学习
+-
+
+    判别模型
+    1.wx
+        感知机
+        逻辑回归
+        SVM                
+
+    2.树
+        简单树
+            ID3          信息增益
+            C4.5         信息增益比，比的是特征的熵（因为信息增益更容易选择属性多的特征，这种的熵更大）
+            CART         分类 gini 回归 方差 均值
+        
+        复杂树
+            bagging
+                随机森林
+            boosting     加法模型，前向分步算法
+                adaboost 指数损失|更新权重
+                gbdt     更一般化的损失误差，让损失更小，梯度控制方向，c控制大小
+        
+        最常用工具 xgboost 是Gradient Boosting的一种高效系统实现
+            支持gbtree和gblinear
+            用到二阶导数信息
+            行列采样
+            分裂节点寻找的近似算法
+            特征并行化
+
+    3.神经网络
+        全连接神经网络(FC)
+        卷积神经网络(CNN)
+        循环神经网络(RNN)
+            长短期记忆网络(LSTM)
+            Gated Recurrent Unit(GRU)
+
+    4.生成模型
+        朴素贝叶斯(NB)
+        隐马尔可夫(HMM)
+        条件随机场(CRF)
+
+    5.推荐模型
+
+
+3⃣️.半监督学习
+-
+
+4⃣️.名词  
+-
+    kernel
+
+
+    过拟合
+        决策树过拟合
+            剪枝 极小化损失函数
+        神经网络过拟合
+            drop out
+            Batch Normalization
+        方差 偏差
+
+
+    评估
+        准确
+        召回
+        f值
+        auc
+    
+    
