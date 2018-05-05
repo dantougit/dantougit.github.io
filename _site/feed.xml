@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Apr 2018 22:20:02 +0800</pubDate>
-    <lastBuildDate>Sun, 22 Apr 2018 22:20:02 +0800</lastBuildDate>
+    <pubDate>Sat, 05 May 2018 19:40:04 +0800</pubDate>
+    <lastBuildDate>Sat, 05 May 2018 19:40:04 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
     
       <item>
@@ -38,8 +38,7 @@
 
 &lt;h2 id=&quot;2⃣️监督学习&quot;&gt;2⃣️.监督学习&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;判别模型
-1.wx
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.wx
     感知机
     逻辑回归
     SVM                
@@ -48,7 +47,7 @@
     简单树
         ID3          信息增益
         C4.5         信息增益比，比的是特征的熵（因为信息增益更容易选择属性多的特征，这种的熵更大）
-        CART         分类 gini 回归 方差 均值
+        CART         分类-gini 回归-方差 取划分空间的均值
     
     复杂树
         bagging
@@ -71,7 +70,7 @@
         长短期记忆网络(LSTM)
         Gated Recurrent Unit(GRU)
 
-4.生成模型
+4.概率模型
     朴素贝叶斯(NB)
     隐马尔可夫(HMM)
     条件随机场(CRF)
@@ -90,7 +89,7 @@
         剪枝 极小化损失函数
     神经网络过拟合
         drop out
-        Batch Normalization
+        &amp;lt;!-- Batch Normalization --&amp;gt;
     方差 偏差
 
 
