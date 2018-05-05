@@ -42,7 +42,7 @@ categories: main
         简单树
             ID3          信息增益
             C4.5         信息增益比，比的是特征的熵（因为信息增益更容易选择属性多的特征，这种的熵更大）
-            CART         分类 gini 回归 方差 均值
+            CART         分类-gini 回归-方差 取划分空间的均值
         
         复杂树
             bagging
@@ -86,7 +86,7 @@ categories: main
             剪枝 极小化损失函数
         神经网络过拟合
             drop out
-            Batch Normalization
+            <!-- Batch Normalization -->
         方差 偏差
 
 
