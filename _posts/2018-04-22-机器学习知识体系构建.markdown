@@ -32,7 +32,6 @@ categories: main
 2⃣️.监督学习
 -
 
-    判别模型
     1.wx
         感知机
         逻辑回归
@@ -65,7 +64,7 @@ categories: main
             长短期记忆网络(LSTM)
             Gated Recurrent Unit(GRU)
 
-    4.生成模型
+    4.概率模型
         朴素贝叶斯(NB)
         隐马尔可夫(HMM)
         条件随机场(CRF)
